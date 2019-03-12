@@ -4,12 +4,16 @@
  */
 
 public class List_inArraySlots {
-
+	enum Type {
+		INT, DOUBLE, STRING
+	}
     // declare fields here
-
-	private int[] list;
+	
+    private int[]    intElements;
+    private double[] doubleElements;
+    private String[] stringElements;
 	private int numberOfElements;
-
+    private int[] typeOfElements;
 	private static final int INITIAL_CAPACITY = 10;
 
 
@@ -17,7 +21,10 @@ public class List_inArraySlots {
       Construct an empty list with a small initial capacity.
      */
   public List_inArraySlots() {
-		list = new int[INITIAL_CAPACITY];
+	intElements = new int[INITIAL_CAPACITY];
+	doubleElements = new int[INITIAL_CAPACITY];
+	stringElements = new int[INITIAL_CAPACITY];
+	typeOfElements = new int[INITIAL_CAPACITY];		
   }
 
 
@@ -43,16 +50,18 @@ public class List_inArraySlots {
   }
 
 
-  /**
-    Appends @value to the end of this list.
-
-    @return true, in keeping with conventions yet to be discussed
-   */
-  public boolean add( int value) {
-    if(numberOfElements == list.length) expand();
-    list[numberOfElements++] = value;
-		return true;
-  }
+    /**
+      Appends @value to the end of this list.
+      @return true, in keeping with conventions yet to be discussed
+     */
+     public boolean add( Type type   // same meaning as in typeOfElements
+                       , int    intValue
+                       , double doubleValue
+                       , String stringValue
+	                       ) {
+		if (typeOfElements.length == numberOfElements) {
+			
+     }
 
 
   /**
