@@ -4,27 +4,24 @@
  */
 
 public class List_inArraySlots {
-	enum Type {
-		INT, DOUBLE, STRING
-	}
     // declare fields here
-	
-    private int[]    intElements;
-    private double[] doubleElements;
-    private String[] stringElements;
-    private int numberOfElements;
-    private Type[] typeOfElements;
-    private static final int INITIAL_CAPACITY = 10;
+
+  private int[]    intElements;
+  private double[] doubleElements;
+  private String[] stringElements;
+  private int numberOfElements;
+  private Type[] typeOfElements;
+  private static final int INITIAL_CAPACITY = 10;
 
 
     /**
       Construct an empty list with a small initial capacity.
      */
   public List_inArraySlots() {
-	intElements = new int[INITIAL_CAPACITY];
-	doubleElements = new double[INITIAL_CAPACITY];
-	stringElements = new String[INITIAL_CAPACITY];
-	typeOfElements = new Type[INITIAL_CAPACITY];		
+		intElements = new int[INITIAL_CAPACITY];
+		doubleElements = new double[INITIAL_CAPACITY];
+		stringElements = new String[INITIAL_CAPACITY];
+		typeOfElements = new Type[INITIAL_CAPACITY];
   }
 
 
@@ -40,12 +37,12 @@ public class List_inArraySlots {
      @return a string representation of this list,
      in [a,b,c,] format
     */
-
-/* DELETE THIS CODE FOR THE toString method
   public String toString() {
   	String output = "[";
-		for(int i : list) {
-			output += i + ", ";
+		for(int i = 0; i < typeOfElements.length; i++) {
+			if(typeOfElements[i] == Type.INT) output += intElements[i] + ", ";
+			else if(typeOfElements[i] == Type.DOUBLE) output += doubleElements[i] + ", ";
+			else output += stringElements[i] + ", ";
 		}
 		output += "]";
 		return output;
@@ -56,11 +53,11 @@ public class List_inArraySlots {
       Appends @value to the end of this list.
       @return true, in keeping with conventions yet to be discussed
      */
-     public boolean add( Type type   // same meaning as in typeOfElements
-                       , int    intValue
-                       , double doubleValue
-                       , String stringValue
-	                       ) {
+  public boolean add( Type type   // same meaning as in typeOfElements
+                     , int    intValue
+                     , double doubleValue
+                     , String stringValue
+                       ) {
 		if (typeOfElements.length == numberOfElements) expand();
 		typeOfElements[numberOfElements] = type;
 		if (type == Type.INT) {
@@ -72,10 +69,9 @@ public class List_inArraySlots {
 		if (type == Type.STRING) {
 		    stringElements[numberOfElements] = stringValue;
 		}
+		numberOfElements++;
 		return true;
-		    
-			
-     }
+  }
 
 
   /**
@@ -84,25 +80,25 @@ public class List_inArraySlots {
    */
   private void expand() {
       // System.out.println( "expand... (for debugging)");
-      int[] intDoubledArray = new int[intElements.length * 2];
-      for(int i = 0; i < numberOfElements; i++){
-	  intDoubledArray[i] = intElements[i];
-      }
+    int[] intDoubledArray = new int[intElements.length * 2];
+    for(int i = 0; i < numberOfElements; i++){
+  		intDoubledArray[i] = intElements[i];
+    }
 
-      double[] doubleDoubledArray = new double[doubleElements.length * 2];
-      for(int i = 0; i < numberOfElements; i++){
-	  doubleDoubledArray[i] = doubleElements[i];
-      }
-      
-      String[] stringDoubledArray = new String[stringElements.length * 2];
-      for(int i = 0; i < numberOfElements; i++){
-	  stringDoubledArray[i] = stringElements[i];
-      }
+    double[] doubleDoubledArray = new double[doubleElements.length * 2];
+    for(int i = 0; i < numberOfElements; i++){
+  		doubleDoubledArray[i] = doubleElements[i];
+    }
 
-      Type[] typeDoubledArray = new Type[typeOfElements.length * 2];
-      for(int i = 0; i < numberOfElements; i++){
-	  typeDoubledArray[i] = typeOfElements[i];
-      }
+    String[] stringDoubledArray = new String[stringElements.length * 2];
+    for(int i = 0; i < numberOfElements; i++){
+		  stringDoubledArray[i] = stringElements[i];
+    }
+
+    Type[] typeDoubledArray = new Type[typeOfElements.length * 2];
+    for(int i = 0; i < numberOfElements; i++){
+		  typeDoubledArray[i] = typeOfElements[i];
+    }
 
 
     intElements = intDoubledArray;
@@ -115,9 +111,9 @@ public class List_inArraySlots {
             // this method is called when that is appropriate.
             // So test using the println(), then comment it out.
             // */
-   }
+	}
 
-   
+
   /**
     accessor
     @return element @index from this list
@@ -126,10 +122,10 @@ public class List_inArraySlots {
          you should NOT complicate your code to check
          whether user violated the condition.)
    */
-
-/* DELETE THIS COMMENT FOR THE get method 
-  public int get(int index) {
-		return list[index];
+  public Element get(int index) {
+		if(typeOfElements[index] == Type.INT) return new Element(Type.INT, intElements[index], 0.0, "");
+		else if(typeOfElements[index] == Type.DOUBLE) return new Element(Type.DOUBLE, 0, doubleElements[index], "");
+		else return new Element(Type.STRING, 0, 0.0, stringElements[index]);
   }
 
   /**
@@ -137,13 +133,13 @@ public class List_inArraySlots {
     @return old value at @index
     @precondition: @index is within the bounds of this list.
    */
-
-/* DELETE THIS COMMENT FOR THE set method 
-  public int set(int index, int newValue) {
-		int oldValue = list[index];
-		list[index] = newValue;
-		return oldValue;
-  }
+  // public int set(int index, int newValue) {
+	// 	oldValue = get(index);
+	// 	if(newValue == INT) return intElements[index];
+	// 	else if(typeOfElements[index] == DOUBLE) return doubleElements[index];
+	// 	else return stringElements[index];
+	// 	return oldValue;
+  // }
 
   /**
     Remove the element at position @index in this list.
@@ -151,8 +147,8 @@ public class List_inArraySlots {
     decrease the index associated with each).
     @return the value that was removed from the list
   */
-    
- /* DELETE THIS COMMENT FOR THE remove  method 
+
+ /* DELETE THIS COMMENT FOR THE remove  method
   public int remove (int index) {
 		int oldValue = list[index];
 		int[] newArray = new int[list.length - 1];
@@ -186,4 +182,3 @@ public class List_inArraySlots {
   }
  */
 }
-
